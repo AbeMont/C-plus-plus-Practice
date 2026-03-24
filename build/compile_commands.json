@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/abemonty/Development/C++ CMake Projects/Soldiers/build",
+  "command": "/usr/bin/g++  -I\"/home/abemonty/Development/C++ CMake Projects/Soldiers/include\" -g -std=gnu++17 -o CMakeFiles/main.dir/src/Soldier.cpp.o -c \"/home/abemonty/Development/C++ CMake Projects/Soldiers/src/Soldier.cpp\"",
+  "file": "/home/abemonty/Development/C++ CMake Projects/Soldiers/src/Soldier.cpp",
+  "output": "CMakeFiles/main.dir/src/Soldier.cpp.o"
+},
+{
+  "directory": "/home/abemonty/Development/C++ CMake Projects/Soldiers/build",
+  "command": "/usr/bin/g++  -I\"/home/abemonty/Development/C++ CMake Projects/Soldiers/include\" -g -std=gnu++17 -o CMakeFiles/main.dir/src/main.cpp.o -c \"/home/abemonty/Development/C++ CMake Projects/Soldiers/src/main.cpp\"",
+  "file": "/home/abemonty/Development/C++ CMake Projects/Soldiers/src/main.cpp",
+  "output": "CMakeFiles/main.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/abemonty/Development/C++ CMake Projects/Soldiers/build",
+  "command": "/usr/bin/g++  -I\"/home/abemonty/Development/C++ CMake Projects/Soldiers/include\" -g -std=gnu++17 -o CMakeFiles/main.dir/src/printoperations.cpp.o -c \"/home/abemonty/Development/C++ CMake Projects/Soldiers/src/printoperations.cpp\"",
+  "file": "/home/abemonty/Development/C++ CMake Projects/Soldiers/src/printoperations.cpp",
+  "output": "CMakeFiles/main.dir/src/printoperations.cpp.o"
+}
+]

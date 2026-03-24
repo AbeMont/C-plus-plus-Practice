@@ -1,0 +1,3 @@
+/home/abemonty/Development/C++ CMake Projects/Soldiers/build/CMakeFiles/main.dir
+/home/abemonty/Development/C++ CMake Projects/Soldiers/build/CMakeFiles/edit_cache.dir
+/home/abemonty/Development/C++ CMake Projects/Soldiers/build/CMakeFiles/rebuild_cache.dir

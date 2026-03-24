@@ -1,4 +1,4 @@
-#include "soldier.h"
+#include "Soldier.h"
 
 Soldier::Soldier(std::string id, std::string name, int health, std::string weapon){
     this->id = id;

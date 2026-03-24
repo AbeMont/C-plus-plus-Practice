@@ -1,5 +1,5 @@
 #include <vector>
-#include "../soldierHeaders/soldier.h"
+#include "Soldier.h"
 
 void printTitle();
 void printSquadVector(std::vector<Soldier> &squad);

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "soldierHeaders/soldier.h"
-#include "printoperations/printoperations.h"
+#include "printoperations.h"
+#include "Soldier.h"
 
 // compile: g++ -o main main.cpp soldierHeaders/soldier.cpp printoperations/printoperations.cpp
 

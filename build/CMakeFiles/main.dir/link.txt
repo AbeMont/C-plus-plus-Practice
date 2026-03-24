@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/main.dir/src/Soldier.cpp.o CMakeFiles/main.dir/src/main.cpp.o CMakeFiles/main.dir/src/printoperations.cpp.o -o main 
