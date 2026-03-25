@@ -38,8 +38,6 @@ int main() {
                 std::vector<Soldier>& squadSelectedToView = selectSquad(squad1, squad2, printSquadVector);
                 std::cout << "Report Generated. \n";
 
-                printMemoryAddresses(squad1, squad2, squadSelectedToView);
-
                 pressToContinue();
                 printCommandActions();
             }
@@ -56,11 +54,6 @@ int main() {
                 for (Soldier& p : squadSelectedToAttack) {
                     p.setHealth(50); // Modifies the actual object in the vector
                 }
-
-                // std::cout << "////////////////////// Should Change ////////////////////// \n";
-                // printSquadVector(squadSelected);
-                // std::cout << "///////////////////// Original Vector //////////////////// \n";
-                // printSquadVector(squad1);
 
                 printMemoryAddresses(squad1, squad2, squadSelectedToAttack);
 
