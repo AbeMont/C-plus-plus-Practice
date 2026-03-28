@@ -1,10 +1,12 @@
 #include <vector>
+#include <algorithm>
 #include "Soldier.h"
 
 void printTitle();
 void printSquadVector(std::vector<Soldier> &squad);
 void printCommandActions();
 void pressToContinue();
+Soldier* getSoldierById(std::string id, std::vector<Soldier> &squad);
 void printMemoryAddresses(
     std::vector<Soldier> &squad1,
     std::vector<Soldier>  &squad2,

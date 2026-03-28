@@ -1,5 +1,6 @@
 #include <limits>
 #include "printoperations.h"
+#include <algorithm>
 
 void printTitle() {
     std::cout << '\n';
@@ -59,6 +60,13 @@ void printMemoryAddresses(
     std::cout << "After Memory address for 'squadSelected' " << &squadSelected << '\n'; // 0x7ffd6e428380
 }
 
+Soldier* getSoldierById(std::string id, std::vector<Soldier> &squad){
+    auto it = std::find_if(squad.begin(), squad.end(), [id](Soldier &obj){
+        return obj.getId() == id;
+    });
+    return it != squad.end() ? &(*it) : nullptr;
+}
+
 std::vector<Soldier>& selectSquad(
     std::vector<Soldier> &squadVector1,
     std::vector<Soldier> &squadVector2,
@@ -78,11 +86,9 @@ std::vector<Soldier>& selectSquad(
         if(squadSelect == '1') {
             myFunc(squadVector1);
             ptr = &squadVector1;
-            return squadVector1;
         } else if(squadSelect == '2') {
             myFunc(squadVector2);
             ptr = &squadVector2;
-            return squadVector2;
         } else {
             std::cout << '\n';
             std::cout << "//////////////////////// \n";
