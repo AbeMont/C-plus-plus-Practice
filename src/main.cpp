@@ -27,6 +27,7 @@ int main() {
 
     char action;
     std::string soldierId;
+    Soldier* selectedSoldierToAttack;
 
     printCommandActions();
 
@@ -50,14 +51,32 @@ int main() {
                 std::cout << "Select a squad first then choose soldier ID to carry out attack... \n";
 
                 std::vector<Soldier>& squadSelectedToAttack = selectSquad(squad1, squad2, printSquadVector);
+                // This can be a function
+                std::cout << "Enter Soldier Id from the list above to attack \n";
+                std::cin >> soldierId;
 
-                for (Soldier& p : squadSelectedToAttack) {
-                    p.setHealth(50); // Modifies the actual object in the vector
+                selectedSoldierToAttack = getSoldierById(soldierId, squadSelectedToAttack);
+
+                if(selectedSoldierToAttack) {
+                    std::cout << "\n";
+                    std::cout << "You selected \n";
+                    std::cout << selectedSoldierToAttack->getName() << '\n';
+                    std::cout << selectedSoldierToAttack->getStatus() << '\n';
+                    std::cout << selectedSoldierToAttack->getHealth() << '\n';
+                    std::cout << selectedSoldierToAttack->getWeapon() << '\n';
+                    std::cout << "\n";
+                } else {
+                    std::cout << "\n";
+                    std::cout << "Invalid Id Entry.......\n";
+                    std::cout << "\n";
                 }
 
-                printMemoryAddresses(squad1, squad2, squadSelectedToAttack);
+                // for (Soldier& p : squadSelectedToAttack) {
+                //     p.setHealth(50); // Modifies the actual object in the vector
+                // }
 
-                std::cout << "Choose Soldier by Id.... \n";
+                // printMemoryAddresses(squad1, squad2, squadSelectedToAttack);
+
                 std::cout << '\n';
 
                 pressToContinue();
