@@ -49,14 +49,35 @@ int main() {
                 // 1. Select Squad to carry out attack
                 std::vector<Soldier>& squadSelectedToAttack = selectSquad(squad1, squad2, printSquadVector);
                 
-                // 2. From the selected squad, choose a soldier by ID to attack
-                Soldier* soldierToAttack = selectedSoldierByIdToAttack(squadSelectedToAttack);
+                // 2. Get memory address of attack squad
+                std::vector<Soldier>* squadSelectedToAttackPtr = &squadSelectedToAttack;
 
-                if(soldierToAttack) {
-                    std::cout << "Successfully Selected soldier \n";
+                // 3. We must check if the memory address of the attack squad matches squad 1 or squad 2, then decide which squad is the attacker and which is the defender
+                //    First we create a ref declaration
+                std::vector<Soldier>& squadSelectedAstarget = 
+                // The pointer squadSelectedToAttackPtr holds the original Memory Address of either squad1 or squad2
+                // using (&) we get the Memory Address of squad1 as --> &squad1
+                !(squadSelectedToAttackPtr == &squad1) ? squad1 : squad2; 
+                
+                // 4. From the selected squad, choose a soldier by ID to attack
+                Soldier* attacker = selectedSoldierByIdToAttack(squadSelectedToAttack, "Attacker");
+
+                if(attacker) {
+                    std::cout << "Successfully selected the attacker \n";
+                    std::cout << "\n";
                 }
 
-                // 3. Select the soldier target
+                std::cout << "Now to view the list of the targets \n";
+                pressToContinue();
+                printSquadVector(squadSelectedAstarget);
+
+                // 5. Select the soldier target
+                Soldier* target = selectedSoldierByIdToAttack(squadSelectedAstarget, "Defender");
+
+                if(target) {
+                    std::cout << "Successfully Selected the target \n";
+                    std::cout << "\n";
+                }
 
                 std::cout << '\n';
 

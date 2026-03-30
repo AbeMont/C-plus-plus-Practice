@@ -43,7 +43,7 @@ void printCommandActions() {
 };
 
 void pressToContinue() {
-    std::cout << "Press any 'Enter' to continue... \n";
+    std::cout << "Press 'Enter' to continue... \n";
     // Clear the input buffer first in case there is a leftover newline character
     // from a previous input operation (e.g., cin >> variable).
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -102,23 +102,30 @@ std::vector<Soldier>& selectSquad(
     return *ptr;
 }
 
-Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelectedToAttack) {
+Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelected, std::string action) {
 
     std::string soldierId;
-    Soldier* selectedSoldierToAttack = nullptr;
+    Soldier* selectedSoldier = nullptr;
 
-    std::cout << "Enter Soldier Id from the list above to attack \n";
+    if(action == "Attacker") {
+        std::cout << "Enter Soldier Id from the list above to attack \n";
+    } else if (action == "Defender") {
+        std::cout << "Enter Soldier Id as the target to attack\n";
+    }
+
     std::cin >> soldierId;
 
-    selectedSoldierToAttack = getSoldierById(soldierId, squadSelectedToAttack);
+    selectedSoldier = getSoldierById(soldierId, squadSelected);
 
-    if(selectedSoldierToAttack) {
+    if(selectedSoldier) {
         std::cout << "\n";
-        std::cout << "You selected \n";
-        std::cout << selectedSoldierToAttack->getName() << '\n';
-        std::cout << selectedSoldierToAttack->getStatus() << '\n';
-        std::cout << selectedSoldierToAttack->getHealth() << '\n';
-        std::cout << selectedSoldierToAttack->getWeapon() << '\n';
+        std::cout << "/////////////////////////////////////// \n";
+        std::cout << "You selected the " << (action == "Attacker" ? "Attacker" : "Defender") << '\n';
+        std::cout << "Name: " << selectedSoldier->getName() << '\n';
+        std::cout << "Status: " << selectedSoldier->getStatus() << '\n';
+        std::cout << "Health: " << selectedSoldier->getHealth() << '\n';
+        std::cout << "Weapon: " << selectedSoldier->getWeapon() << '\n';
+        std::cout << "/////////////////////////////////////// \n";
         std::cout << "\n";
     } else {
         std::cout << "\n";
@@ -126,5 +133,5 @@ Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelectedToAttack
         std::cout << "\n";
     }
 
-    return selectedSoldierToAttack;
+    return selectedSoldier;
 }
