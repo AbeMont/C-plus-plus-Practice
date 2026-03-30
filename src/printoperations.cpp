@@ -101,3 +101,30 @@ std::vector<Soldier>& selectSquad(
     // When we dereference, we get access to the actual value
     return *ptr;
 }
+
+Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelectedToAttack) {
+
+    std::string soldierId;
+    Soldier* selectedSoldierToAttack = nullptr;
+
+    std::cout << "Enter Soldier Id from the list above to attack \n";
+    std::cin >> soldierId;
+
+    selectedSoldierToAttack = getSoldierById(soldierId, squadSelectedToAttack);
+
+    if(selectedSoldierToAttack) {
+        std::cout << "\n";
+        std::cout << "You selected \n";
+        std::cout << selectedSoldierToAttack->getName() << '\n';
+        std::cout << selectedSoldierToAttack->getStatus() << '\n';
+        std::cout << selectedSoldierToAttack->getHealth() << '\n';
+        std::cout << selectedSoldierToAttack->getWeapon() << '\n';
+        std::cout << "\n";
+    } else {
+        std::cout << "\n";
+        std::cout << "Invalid Id Entry.......\n";
+        std::cout << "\n";
+    }
+
+    return selectedSoldierToAttack;
+}

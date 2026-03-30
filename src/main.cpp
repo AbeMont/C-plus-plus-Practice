@@ -26,8 +26,6 @@ int main() {
     printTitle();
 
     char action;
-    std::string soldierId;
-    Soldier* selectedSoldierToAttack;
 
     printCommandActions();
 
@@ -46,36 +44,19 @@ int main() {
             case '2': {
                 std::cout << '\n';
                 std::cout << "Attack Command \n";
-                // First need to ask to return of the id of the soldier who will attack from the vector
-                // Second is to get the id of the target
                 std::cout << "Select a squad first then choose soldier ID to carry out attack... \n";
 
+                // 1. Select Squad to carry out attack
                 std::vector<Soldier>& squadSelectedToAttack = selectSquad(squad1, squad2, printSquadVector);
-                // This can be a function
-                std::cout << "Enter Soldier Id from the list above to attack \n";
-                std::cin >> soldierId;
+                
+                // 2. From the selected squad, choose a soldier by ID to attack
+                Soldier* soldierToAttack = selectedSoldierByIdToAttack(squadSelectedToAttack);
 
-                selectedSoldierToAttack = getSoldierById(soldierId, squadSelectedToAttack);
-
-                if(selectedSoldierToAttack) {
-                    std::cout << "\n";
-                    std::cout << "You selected \n";
-                    std::cout << selectedSoldierToAttack->getName() << '\n';
-                    std::cout << selectedSoldierToAttack->getStatus() << '\n';
-                    std::cout << selectedSoldierToAttack->getHealth() << '\n';
-                    std::cout << selectedSoldierToAttack->getWeapon() << '\n';
-                    std::cout << "\n";
-                } else {
-                    std::cout << "\n";
-                    std::cout << "Invalid Id Entry.......\n";
-                    std::cout << "\n";
+                if(soldierToAttack) {
+                    std::cout << "Successfully Selected soldier \n";
                 }
 
-                // for (Soldier& p : squadSelectedToAttack) {
-                //     p.setHealth(50); // Modifies the actual object in the vector
-                // }
-
-                // printMemoryAddresses(squad1, squad2, squadSelectedToAttack);
+                // 3. Select the soldier target
 
                 std::cout << '\n';
 

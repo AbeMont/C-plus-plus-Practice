@@ -15,3 +15,4 @@ std::vector<Soldier>& selectSquad(
     std::vector<Soldier> &squadVector1, 
     std::vector<Soldier> &squadVector2,
     void (*myFunc)(std::vector<Soldier> &soldiersVector));
+Soldier* selectedSoldierByIdToAttack(std::vector<Soldier>  &squadSelectedToAttack);
