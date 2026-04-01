@@ -107,31 +107,48 @@ Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelected, std::s
     std::string soldierId;
     Soldier* selectedSoldier = nullptr;
 
-    if(action == "Attacker") {
+    if (action == "Attacker") {
         std::cout << "Enter Soldier Id from the list above to attack \n";
     } else if (action == "Defender") {
         std::cout << "Enter Soldier Id as the target to attack\n";
     }
 
-    std::cin >> soldierId;
+    do {
 
-    selectedSoldier = getSoldierById(soldierId, squadSelected);
+        std::cin >> soldierId;
 
-    if(selectedSoldier) {
-        std::cout << "\n";
-        std::cout << "/////////////////////////////////////// \n";
-        std::cout << "You selected the " << (action == "Attacker" ? "Attacker" : "Defender") << '\n';
-        std::cout << "Name: " << selectedSoldier->getName() << '\n';
-        std::cout << "Status: " << selectedSoldier->getStatus() << '\n';
-        std::cout << "Health: " << selectedSoldier->getHealth() << '\n';
-        std::cout << "Weapon: " << selectedSoldier->getWeapon() << '\n';
-        std::cout << "/////////////////////////////////////// \n";
-        std::cout << "\n";
-    } else {
-        std::cout << "\n";
-        std::cout << "Invalid Id Entry.......\n";
-        std::cout << "\n";
-    }
+        selectedSoldier = getSoldierById(soldierId, squadSelected);
+
+        // Need to run a check to see if the soldier is still alive
+
+        if(selectedSoldier) {
+            if(selectedSoldier->getStatus() == "Alive") {
+                std::cout << "\n";
+                std::cout << "/////////////////////////////////////// \n";
+                std::cout << "You selected the " << (action == "Attacker" ? "Attacker" : "Defender") << '\n';
+                std::cout << "Name: " << selectedSoldier->getName() << '\n';
+                std::cout << "Status: " << selectedSoldier->getStatus() << '\n';
+                std::cout << "Health: " << selectedSoldier->getHealth() << '\n';
+                std::cout << "Weapon: " << selectedSoldier->getWeapon() << '\n';
+                std::cout << "/////////////////////////////////////// \n";
+                std::cout << "\n";
+                break;
+            } else {
+                std::cout << "\n";
+                std::cout << "Name: " << selectedSoldier->getId() << '\n';
+                std::cout << "Name: " << selectedSoldier->getName() << '\n';
+                std::cout << "Is Deceased...Choose again\n";
+                std::cout << "\n";
+            }
+        } else {
+            std::cout << "\n";
+            printSquadVector(squadSelected);
+            std::cout << "\n";
+            std::cout << "Invalid Id Entry.......\n";
+            std::cout << "Enter Soldier Id from the list above as the " << (action == "Attacker" ? "attacker. " : "target. ") << '\n';
+            std::cout << "\n";
+        }
+    } while(selectedSoldier == nullptr);
 
     return selectedSoldier;
 }
