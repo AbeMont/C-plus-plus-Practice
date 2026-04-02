@@ -24,6 +24,7 @@ class Soldier {
         int getHealth();
 
         void setHealth(int currentHealth);
+        void setStatus(std::string status);
 
         // Actions
         int takeDamage(int damageAmount);

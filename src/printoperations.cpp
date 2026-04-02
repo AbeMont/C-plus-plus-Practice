@@ -102,7 +102,7 @@ std::vector<Soldier>& selectSquad(
     return *ptr;
 }
 
-Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelected, std::string action) {
+Soldier* selectedSoldierByIdForEngagement(std::vector<Soldier> &squadSelected, std::string action) {
 
     std::string soldierId;
     Soldier* selectedSoldier = nullptr;
@@ -135,10 +135,13 @@ Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelected, std::s
                 break;
             } else {
                 std::cout << "\n";
-                std::cout << "Name: " << selectedSoldier->getId() << '\n';
+                printSquadVector(squadSelected);
+                std::cout << "\n";
+                std::cout << "Id: " << selectedSoldier->getId() << '\n';
                 std::cout << "Name: " << selectedSoldier->getName() << '\n';
                 std::cout << "Is Deceased...Choose again\n";
                 std::cout << "\n";
+                selectedSoldier = nullptr;
             }
         } else {
             std::cout << "\n";
@@ -151,4 +154,18 @@ Soldier* selectedSoldierByIdToAttack(std::vector<Soldier> &squadSelected, std::s
     } while(selectedSoldier == nullptr);
 
     return selectedSoldier;
+}
+
+void engagementBattle(Soldier& attacker, Soldier& target) {
+    std::string attackerWeapon = attacker.getWeapon();
+    int damageDealt = attacker.dealDamage(attackerWeapon);
+
+    int targetCurrentHealth = target.getHealth() - damageDealt;
+    target.setHealth(targetCurrentHealth);
+    int targetHealth = target.getHealth();
+
+    if(targetHealth <= 0) {
+        target.setStatus("Deceased");
+        target.setHealth(0);
+    }
 }
