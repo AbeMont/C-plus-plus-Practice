@@ -30,8 +30,12 @@ int Soldier::getHealth() {
     return this->health;
 };
 
-void Soldier::setHealth(int currentHealth){
+void Soldier::setHealth(int currentHealth) {
     this->health = currentHealth;
+};
+
+void Soldier::setStatus(std::string status) {
+    this->status = status;
 };
 
 // Actions

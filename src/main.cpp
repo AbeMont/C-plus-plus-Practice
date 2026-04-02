@@ -57,10 +57,10 @@ int main() {
                 std::vector<Soldier>& squadSelectedAstarget = 
                 // The pointer squadSelectedToAttackPtr holds the original Memory Address of either squad1 or squad2
                 // using (&) we get the Memory Address of squad1 as --> &squad1
-                !(squadSelectedToAttackPtr == &squad1) ? squad1 : squad2; 
+                squadSelectedToAttackPtr == &squad1 ? squad2 : squad1; 
                 
                 // 4. From the selected squad, choose a soldier by ID to attack
-                Soldier* attacker = selectedSoldierByIdToAttack(squadSelectedToAttack, "Attacker");
+                Soldier* attacker = selectedSoldierByIdForEngagement(squadSelectedToAttack, "Attacker");
 
                 if(attacker) {
                     std::cout << "Successfully selected the attacker \n";
@@ -72,7 +72,7 @@ int main() {
                 printSquadVector(squadSelectedAstarget);
 
                 // 5. Select the soldier target
-                Soldier* target = selectedSoldierByIdToAttack(squadSelectedAstarget, "Defender");
+                Soldier* target = selectedSoldierByIdForEngagement(squadSelectedAstarget, "Defender");
 
                 if(target) {
                     std::cout << "Successfully Selected the target \n";
@@ -82,6 +82,10 @@ int main() {
                 std::cout << '\n';
 
                 pressToContinue();
+
+                // Time to engage
+                engagementBattle(*attacker, *target);
+
                 printCommandActions();
             }
             break;
