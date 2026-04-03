@@ -51,6 +51,13 @@ void pressToContinue() {
     std::cin.get();
 }
 
+void statusCommand(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2) {
+    std::vector<Soldier>& squadSelectedToView = selectSquad(squad1, squad2, printSquadVector);
+    std::cout << "Report Generated. \n";
+    pressToContinue();
+    printCommandActions();
+}
+
 void printMemoryAddresses(
     std::vector<Soldier>  &squad1, 
     std::vector<Soldier> &squad2, 
@@ -157,9 +164,12 @@ Soldier* selectedSoldierByIdForEngagement(std::vector<Soldier> &squadSelected, s
 }
 
 void engagementBattle(Soldier& attacker, Soldier& target) {
+
+    std::string attackerName = attacker.getName();
     std::string attackerWeapon = attacker.getWeapon();
     int damageDealt = attacker.dealDamage(attackerWeapon);
 
+    std::string targetName = target.getName();
     int targetCurrentHealth = target.getHealth() - damageDealt;
     target.setHealth(targetCurrentHealth);
     int targetHealth = target.getHealth();
@@ -168,4 +178,65 @@ void engagementBattle(Soldier& attacker, Soldier& target) {
         target.setStatus("Deceased");
         target.setHealth(0);
     }
+
+    std::cout << "/////////////////////////////////////////////////// \n";
+    std::cout << attackerName << " is engaing " << targetName << " in battle." << '\n';
+    std::cout << attackerName << " has dealt " << damageDealt << " damage to " << targetName << ". \n";
+    std::cout << target.getName() << " now has " << target.getHealth() << " health. \n";
+    std::cout << "/////////////////////////////////////////////////// \n";
+    std::cout << "\n";
+}
+
+void attackCommands(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2) {
+    std::cout << '\n';
+    std::cout << "Attack Command \n";
+    std::cout << "Select a squad first then choose soldier ID to carry out attack... \n";
+
+    // 1. Select Squad to carry out attack
+    std::vector<Soldier>& squadSelectedToAttack = selectSquad(squad1, squad2, printSquadVector);
+    
+    // 2. Get memory address of attack squad
+    std::vector<Soldier>* squadSelectedToAttackPtr = &squadSelectedToAttack;
+
+    // 3. We must check if the memory address of the attack squad matches squad 1 or squad 2, then decide which squad is the attacker and which is the defender
+    //    First we create a ref declaration
+    std::vector<Soldier>& squadSelectedAstarget = 
+    // The pointer squadSelectedToAttackPtr holds the original Memory Address of either squad1 or squad2
+    // using (&) we get the Memory Address of squad1 as --> &squad1
+    squadSelectedToAttackPtr == &squad1 ? squad2 : squad1; 
+    
+    // 4. From the selected squad, choose a soldier by ID to attack
+    Soldier* attacker = selectedSoldierByIdForEngagement(squadSelectedToAttack, "Attacker");
+
+    if(attacker) {
+        std::cout << "Successfully selected the attacker \n";
+        std::cout << "\n";
+    }
+
+    std::cout << "Now to view the list of the targets \n";
+    std::cout << "\n";
+    pressToContinue();
+    printSquadVector(squadSelectedAstarget);
+
+    // 5. Select the soldier target
+    Soldier* target = selectedSoldierByIdForEngagement(squadSelectedAstarget, "Defender");
+
+    if(target) {
+        std::cout << "Successfully Selected the target \n";
+        std::cout << "\n";
+    }
+
+    std::cout << '\n';
+
+    pressToContinue();
+
+    // Time to engage
+    engagementBattle(*attacker, *target);
+
+    printCommandActions();
+}
+
+void healCommand(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2) {
+    std::cout << "Heal Command \n";
+    printCommandActions();
 }

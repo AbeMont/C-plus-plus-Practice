@@ -17,3 +17,6 @@ std::vector<Soldier>& selectSquad(
     void (*myFunc)(std::vector<Soldier> &soldiersVector));
 Soldier* selectedSoldierByIdForEngagement(std::vector<Soldier>  &squadSelectedToAttack, std::string action);
 void engagementBattle(Soldier& attacker, Soldier& target);
+void statusCommand(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2);
+void attackCommands(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2);
+void healCommand(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2);

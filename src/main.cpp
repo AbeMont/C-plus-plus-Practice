@@ -33,69 +33,14 @@ int main() {
         std::cin >> action;
 
         switch (action) {
-            case '1': {
-                std::vector<Soldier>& squadSelectedToView = selectSquad(squad1, squad2, printSquadVector);
-                std::cout << "Report Generated. \n";
-
-                pressToContinue();
-                printCommandActions();
-            }
-            break;
-            case '2': {
-                std::cout << '\n';
-                std::cout << "Attack Command \n";
-                std::cout << "Select a squad first then choose soldier ID to carry out attack... \n";
-
-                // 1. Select Squad to carry out attack
-                std::vector<Soldier>& squadSelectedToAttack = selectSquad(squad1, squad2, printSquadVector);
-                
-                // 2. Get memory address of attack squad
-                std::vector<Soldier>* squadSelectedToAttackPtr = &squadSelectedToAttack;
-
-                // 3. We must check if the memory address of the attack squad matches squad 1 or squad 2, then decide which squad is the attacker and which is the defender
-                //    First we create a ref declaration
-                std::vector<Soldier>& squadSelectedAstarget = 
-                // The pointer squadSelectedToAttackPtr holds the original Memory Address of either squad1 or squad2
-                // using (&) we get the Memory Address of squad1 as --> &squad1
-                squadSelectedToAttackPtr == &squad1 ? squad2 : squad1; 
-                
-                // 4. From the selected squad, choose a soldier by ID to attack
-                Soldier* attacker = selectedSoldierByIdForEngagement(squadSelectedToAttack, "Attacker");
-
-                if(attacker) {
-                    std::cout << "Successfully selected the attacker \n";
-                    std::cout << "\n";
-                }
-
-                std::cout << "Now to view the list of the targets \n";
-                pressToContinue();
-                printSquadVector(squadSelectedAstarget);
-
-                // 5. Select the soldier target
-                Soldier* target = selectedSoldierByIdForEngagement(squadSelectedAstarget, "Defender");
-
-                if(target) {
-                    std::cout << "Successfully Selected the target \n";
-                    std::cout << "\n";
-                }
-
-                std::cout << '\n';
-
-                pressToContinue();
-
-                // Time to engage
-                engagementBattle(*attacker, *target);
-
-                printCommandActions();
-            }
-            break;
-            case '3':
-                std::cout << "Heal Command \n";
-                printCommandActions();
-            break;
-            default:
-                printCommandActions();
-            break;
+            case '1': statusCommand(squad1, squad2);
+        break;
+            case '2': attackCommands(squad1, squad2);
+        break;
+            case '3': healCommand(squad1, squad2);
+        break;
+            default: printCommandActions();
+        break;
         }
 
     } while(action != 'q');
