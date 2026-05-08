@@ -11,7 +11,7 @@ void printTitle() {
     std::cout << '\n';
 };
 
-void printSquadVector(std::vector<Soldier> &squad) {
+void printSquadVector(std::vector<Soldier>& squad) {
 
     unsigned int vectorSize = squad.size();
 
@@ -237,6 +237,47 @@ void attackCommands(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2) 
 }
 
 void healCommand(std::vector<Soldier>& squad1, std::vector<Soldier>& squad2) {
+
+    std::cout << "////////////////////////////////////////////////";
     std::cout << "Heal Command \n";
+    std::cout << "////////////////////////////////////////////////";
+    std::cout << "\n";
+
+    // 1. Select Squad First
+    std::vector<Soldier>& selectedSquad = selectSquad(squad1, squad2, printSquadVector);
+
+    // 2. Enter Soldier Id
+    std::cout << "Choose soldier by Id to heal \n";
+    std::cout << "\n";
+    std::string id;
+
+    // 3. Need to do a nullptr check, in case id is incorrect
+    Soldier* soldier = nullptr;
+
+    do {
+        std::cin >> id;
+        soldier = getSoldierById(id, selectedSquad);
+
+        if(soldier) {
+            std::cout << "You Selected " << soldier->getName() << " to heal. \n";
+            std::cout << "\n";
+
+            if (soldier->getHealth() == 100) {
+                std::cout << "Soldier is fully healed";
+                std::cout << "\n";
+            } else {
+                int currentHealth = soldier->getHealth();
+                int updatedHealth = (currentHealth + 25) > 100 ? 100 : (currentHealth + 25);
+                soldier->setHealth(updatedHealth);
+            }
+        } else {
+            std::cout << "Invalid Id, try again... \n";
+            std::cout << "\n";
+        }
+
+    } while(soldier == nullptr);
+
+    pressToContinue();
+
     printCommandActions();
 }
